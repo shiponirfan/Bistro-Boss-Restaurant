@@ -2,3 +2,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.carousel .thumb img {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.carousel .slide img {
+    max-height: 800px;
+    width: auto;
+    object-fit: cover;
+}
+
+.carousel .thumbs-wrapper {
+    text-align: center;
+}
+
+.carousel .thumb {
+    width: 130px !important;
+}
