@@ -95,7 +95,9 @@ const Navbar = () => {
           <Link to="/cart">
             <img className="w-16" src={cart} alt="cart" />
           </Link>
-          <button className="text-xl font-bold hover:text-[#EEFF25] duration-300">SIGN OUT</button>
+          <button className="text-xl font-bold hover:text-[#EEFF25] duration-300">
+            SIGN OUT
+          </button>
           <img className="w-16" src={user} alt="user" />
         </div>
       </div>
