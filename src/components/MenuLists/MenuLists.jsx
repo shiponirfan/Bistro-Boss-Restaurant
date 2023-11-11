@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 
 const MenuLists = ({ item }) => {
-  console.log(item);
   const { name, image, recipe, price } = item;
   return (
     <div className="flex justify-between items-center gap-6">

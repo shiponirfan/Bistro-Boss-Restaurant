@@ -21,3 +21,10 @@
 .carousel .thumb {
     width: 130px !important;
 }
+
+.featured-section{
+    background-image: url(./assets/home/featured.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
