@@ -3,7 +3,7 @@ import SectionTitle from "../SectionTitle/SectionTitle";
 
 const Featured = () => {
   return (
-    <section className="featured-section">
+    <section className="featured-section bg-fixed">
       <div className="bg-black bg-opacity-70 py-32 text-white">
         <SectionTitle heading={"FROM OUR MENU"} subHeading={"Check it out"} />
         <div className="container mx-auto px-6 lg:px-8 flex gap-8 justify-between items-center">
