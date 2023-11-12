@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-const ChefRecommendsCard = ({ item }) => {
+const FoodMenuCard = ({ item }) => {
   const { name, image, recipe} = item;
   return (
     <div className="card bg-[#F3F3F3] rounded-none">
@@ -18,8 +18,8 @@ const ChefRecommendsCard = ({ item }) => {
   );
 };
 
-ChefRecommendsCard.propTypes = {
+FoodMenuCard.propTypes = {
   item: PropTypes.array,
 };
 
-export default ChefRecommendsCard;
+export default FoodMenuCard;

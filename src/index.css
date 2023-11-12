@@ -28,3 +28,7 @@
     background-size: cover;
     background-repeat: no-repeat;
 }
+
+.react-parallax img {
+    object-fit: cover;
+}

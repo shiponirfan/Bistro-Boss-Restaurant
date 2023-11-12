@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-const MenuLists = ({ item }) => {
+const MenuListsCard = ({ item }) => {
   const { name, image, recipe, price } = item;
   return (
     <div className="flex justify-between items-center gap-6">
@@ -20,8 +20,8 @@ const MenuLists = ({ item }) => {
   );
 };
 
-MenuLists.propTypes = {
+MenuListsCard.propTypes = {
   item: PropTypes.array,
 };
 
-export default MenuLists;
+export default MenuListsCard;

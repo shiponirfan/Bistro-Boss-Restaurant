@@ -48,12 +48,12 @@ const Navbar = () => {
       </li>
       <li className="text-xl font-bold hover:text-[#EEFF25] duration-300">
         <NavLink
-          to="/shop"
+          to="/ordered-food/salad"
           className={({ isActive, isPending }) =>
             isPending ? "pending" : isActive ? "text-[#EEFF25]" : ""
           }
         >
-          Our Shop
+          Ordered Food
         </NavLink>
       </li>
     </>
