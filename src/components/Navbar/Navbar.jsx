@@ -1,9 +1,19 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import cart from "../../assets/icon/cart.png";
-import user from "../../assets/icon/user.png";
+import userimg from "../../assets/icon/user.png";
+import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
+  const { user, userLogOut } = useAuth();
+
+  const handleSignOut = () => {
+    userLogOut().then(() => {
+      Swal.fire("Logout Completed");
+    });
+  };
+
   const navMenu = (
     <>
       <li className="text-xl font-bold hover:text-[#EEFF25] duration-300">
@@ -95,10 +105,21 @@ const Navbar = () => {
           <Link to="/cart">
             <img className="w-16" src={cart} alt="cart" />
           </Link>
-          <button className="text-xl font-bold hover:text-[#EEFF25] duration-300">
-            SIGN OUT
-          </button>
-          <img className="w-16" src={user} alt="user" />
+          {user ? (
+            <button
+              onClick={handleSignOut}
+              className="text-xl font-bold hover:text-[#EEFF25] duration-300"
+            >
+              SIGN OUT
+            </button>
+          ) : (
+            <Link to="/login">
+              <button className="text-xl font-bold hover:text-[#EEFF25] duration-300">
+                LOGIN
+              </button>
+            </Link>
+          )}
+          <img className="w-16" src={userimg} alt="user" />
         </div>
       </div>
     </nav>
