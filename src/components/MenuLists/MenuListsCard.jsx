@@ -21,7 +21,7 @@ const MenuListsCard = ({ item }) => {
 };
 
 MenuListsCard.propTypes = {
-  item: PropTypes.array,
+  item: PropTypes.object,
 };
 
 export default MenuListsCard;

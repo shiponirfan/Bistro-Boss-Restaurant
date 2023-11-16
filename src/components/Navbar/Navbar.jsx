@@ -1,12 +1,15 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo.png";
-import cart from "../../assets/icon/cart.png";
-import userimg from "../../assets/icon/user.png";
+import userImg from "../../assets/icon/user.png";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import { FaShoppingCart } from "react-icons/fa";
+import useCarts from "../../hooks/useCarts";
 
 const Navbar = () => {
   const { user, userLogOut } = useAuth();
+
+  const [carts] = useCarts();
 
   const handleSignOut = () => {
     userLogOut().then(() => {
@@ -102,9 +105,6 @@ const Navbar = () => {
         </div>
         <div className="hidden lg:flex space-x-6">
           <ul className="space-x-6 menu-horizontal px-1">{navMenu}</ul>
-          <Link to="/cart">
-            <img className="w-16" src={cart} alt="cart" />
-          </Link>
           {user ? (
             <button
               onClick={handleSignOut}
@@ -119,7 +119,18 @@ const Navbar = () => {
               </button>
             </Link>
           )}
-          <img className="w-16" src={userimg} alt="user" />
+          <Link to="/dashboard/cart">
+            <button className="btn">
+              <FaShoppingCart className="text-xl" />
+              <div className="badge badge-secondary">+{carts.length}</div>
+            </button>
+          </Link>
+          {user?.photoURL ? (
+            <img className="w-16" src={user?.photoURL} alt="user" />
+          ) : (
+            <img className="w-16" src={userImg} alt="user" />
+          )}
+          {user?.displayName && <span>{user?.displayName}</span>}
         </div>
       </div>
     </nav>

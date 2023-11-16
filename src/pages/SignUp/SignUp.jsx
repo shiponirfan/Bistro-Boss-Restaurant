@@ -1,10 +1,15 @@
 import woodPattern from "../../assets/login/wood-pattern.png";
 import loginImg from "../../assets/login/authentication.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 const SignUp = () => {
-  const { userSignUp } = useAuth();
+  const { userSignUp, updateUserProfile } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || '/';
   const {
     register,
     handleSubmit,
@@ -12,9 +17,15 @@ const SignUp = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    userSignUp(data.email, data.password).then((result) => {
-      const loggedUser = result.user;
-      console.log(loggedUser);
+    userSignUp(data.email, data.password).then(() => {
+      updateUserProfile(data.name, data.photoUrl)
+      .then(() => {
+        Swal.fire("Signup Success");
+        navigate(from, {replace: true});
+      })
+      .catch(err => {
+        console.log(err);
+      });
     });
     console.log(data);
   };
@@ -42,6 +53,22 @@ const SignUp = () => {
               {errors.name && (
                 <span className="text-red-600 text-left mt-2">
                   Name Is Required
+                </span>
+              )}
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-xl font-semibold">Photo Url</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Type here"
+                {...register("photoUrl", { required: true })}
+                className="input input-bordered"
+              />
+              {errors.name && (
+                <span className="text-red-600 text-left mt-2">
+                  PhotoUrl Is Required
                 </span>
               )}
             </div>

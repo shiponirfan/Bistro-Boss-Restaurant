@@ -32,3 +32,7 @@
 .react-parallax img {
     object-fit: cover;
 }
+
+.dashboard-menu li a.active{
+    color: white;
+}

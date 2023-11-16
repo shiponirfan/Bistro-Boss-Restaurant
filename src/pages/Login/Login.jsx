@@ -1,6 +1,6 @@
 import woodPattern from "../../assets/login/wood-pattern.png";
 import loginImg from "../../assets/login/authentication.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
@@ -12,6 +12,12 @@ import Swal from "sweetalert2";
 const Login = () => {
   const { userLogin } = useAuth();
   const [disabled, setDisabled] = useState(true);
+  const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location);
+  const from = location.state?.from?.pathname || "/";
+  console.log(from);
+
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
@@ -33,6 +39,7 @@ const Login = () => {
       .then((result) => {
         Swal.fire("Login Success");
         console.log(result);
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         console.log(err);
