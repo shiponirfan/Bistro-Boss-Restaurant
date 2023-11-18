@@ -21,7 +21,7 @@ const FoodMenuCard = ({ item }) => {
         image,
         price,
       };
-      axios.post("/api/v1/carts", cartItem).then((res) => {
+      axios.post("/carts", cartItem).then((res) => {
 
         if (res.data.insertedId) {
           const Toast = Swal.mixin({

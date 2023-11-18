@@ -3,13 +3,13 @@ import useAxiosSecure from "./useAxiosSecure";
 import useAuth from "./useAuth";
 
 const useCarts = () => {
-  const axios = useAxiosSecure();
+  const axiosSecure = useAxiosSecure();
   const {user} = useAuth();
 
   const {refetch, data: carts = [] } = useQuery({
     queryKey: ["carts", user?.email],
     queryFn: async () => {
-      const res = await axios.get(`/api/v1/carts?email=${user.email}`);
+      const res = await axiosSecure.get(`/carts?email=${user.email}`);
       return res.data;
     },
   });

@@ -4,12 +4,15 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 const SignUp = () => {
   const { userSignUp, updateUserProfile } = useAuth();
+  const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const from = location.state?.from?.pathname || '/';
+  const from = location.state?.from?.pathname || "/";
   const {
     register,
     handleSubmit,
@@ -19,13 +22,21 @@ const SignUp = () => {
   const onSubmit = (data) => {
     userSignUp(data.email, data.password).then(() => {
       updateUserProfile(data.name, data.photoUrl)
-      .then(() => {
-        Swal.fire("Signup Success");
-        navigate(from, {replace: true});
-      })
-      .catch(err => {
-        console.log(err);
-      });
+        .then(() => {
+          const userInformation = {
+            userName: data.name,
+            userEmail: data.email,
+          };
+          axiosPublic.post("/users", userInformation).then((res) => {
+            if (res.data.insertedId) {
+              Swal.fire("Signup Success");
+              navigate(from, { replace: true });
+            }
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     });
     console.log(data);
   };
@@ -58,7 +69,9 @@ const SignUp = () => {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text text-xl font-semibold">Photo Url</span>
+                <span className="label-text text-xl font-semibold">
+                  Photo Url
+                </span>
               </label>
               <input
                 type="text"
@@ -142,6 +155,9 @@ const SignUp = () => {
               Go to log in
             </Link>
           </h2>
+          <div className="px-8">
+            <SocialLogin />
+          </div>
         </div>
         <div className="w-1/2 flex justify-center">
           <img src={loginImg} alt="login img" />

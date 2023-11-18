@@ -9,14 +9,13 @@ import {
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 const Login = () => {
   const { userLogin } = useAuth();
   const [disabled, setDisabled] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location);
   const from = location.state?.from?.pathname || "/";
-  console.log(from);
 
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -36,9 +35,8 @@ const Login = () => {
     const password = form.password.value;
 
     userLogin(email, password)
-      .then((result) => {
+      .then(() => {
         Swal.fire("Login Success");
-        console.log(result);
         navigate(from, { replace: true });
       })
       .catch((err) => {
@@ -112,6 +110,9 @@ const Login = () => {
               Create a New Account
             </Link>
           </h2>
+          <div className="px-8">
+            <SocialLogin />
+          </div>
         </div>
       </div>
     </div>
