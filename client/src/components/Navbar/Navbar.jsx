@@ -5,9 +5,11 @@ import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { FaShoppingCart } from "react-icons/fa";
 import useCarts from "../../hooks/useCarts";
+import useAdmin from "../../hooks/useAdmin";
 
 const Navbar = () => {
   const { user, userLogOut } = useAuth();
+  const [isAdmin] = useAdmin();
 
   const [carts] = useCarts();
 
@@ -39,16 +41,33 @@ const Navbar = () => {
           Contact Us
         </NavLink>
       </li>
-      <li className="text-xl font-bold hover:text-[#EEFF25] duration-300">
-        <NavLink
-          to="/dashboard"
-          className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "text-[#EEFF25]" : ""
-          }
-        >
-          Dashboard
-        </NavLink>
-      </li>
+      {user ? (
+        isAdmin ? (
+          <li className="text-xl font-bold hover:text-[#EEFF25] duration-300">
+            <NavLink
+              to="/dashboard/adminHome"
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "text-[#EEFF25]" : ""
+              }
+            >
+              Dashboard
+            </NavLink>
+          </li>
+        ) : (
+          <li className="text-xl font-bold hover:text-[#EEFF25] duration-300">
+            <NavLink
+              to="/dashboard/userHome"
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "text-[#EEFF25]" : ""
+              }
+            >
+              Dashboard
+            </NavLink>
+          </li>
+        )
+      ) : (
+        ""
+      )}
       <li className="text-xl font-bold hover:text-[#EEFF25] duration-300">
         <NavLink
           to="/menu"
